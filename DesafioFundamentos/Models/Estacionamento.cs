@@ -6,6 +6,8 @@ namespace DesafioFundamentos.Models
         private decimal precoPorHora = 0;
         private List<string> veiculos = new List<string>();
 
+        private int maxVeiculos = 10;
+
         public Estacionamento(decimal precoInicial, decimal precoPorHora)
         {
             this.precoInicial = precoInicial;
@@ -14,6 +16,12 @@ namespace DesafioFundamentos.Models
 
         public void AdicionarVeiculo()
         {
+            if (veiculos.Count >= maxVeiculos)
+            {
+                Console.WriteLine("O estacionamento está lotado!");
+                return;
+            }
+
             // Pede para o usuário digitar uma placa (ReadLine) e adicionar na lista "veiculos"
             Console.WriteLine("Digite a placa do veículo para estacionar:");
 
@@ -60,7 +68,7 @@ namespace DesafioFundamentos.Models
             // Verifica se há veículos no estacionamento
             if (veiculos.Any())
             {
-                Console.WriteLine($"VEICULOS ESTACIONADOS ({veiculos.Count}/100)");
+                Console.WriteLine($"VEICULOS ESTACIONADOS ({veiculos.Count}/{maxVeiculos})");
 
                 // Exibe os veículos estacionados
                 veiculos.ForEach(veiculo => Console.WriteLine($"+ {veiculo}"));
